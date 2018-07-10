@@ -1,0 +1,31 @@
+--- 
+tasks:
+    #  Root task that defines common data for all tasks
+    taskid : root
+    processor : root
+    options :
+        outputdir : ${_args.outdir}
+        templateroot: "_model/code-templates"
+        tempdir : ${default.temp}     
+    subtasks :
+    #  Use Hyperledger Composer taks to extract all information and setup the context
+    -   taskid : ParseNetwork
+        processor : composernetwork
+        options :
+            archive : "${_args.archive}"   
+            docsPrefix : "${_args.extDocsRoot}"  
+    #  Uses multiple templates specified in 'inputdir' & 'pattern' to work on the context and produce markdown output files
+    -   taskid : CreateCode
+        processor : njk_multi
+        options :
+            inputdir : "smartcontracts"
+            pattern : "**/*.njk"
+            outputextension : ".js"
+            outputdir : "${tempdir}"
+    -   taskid : SplitFiles
+        processor : split
+        options :
+            inputdir :  "${tempdir}"
+            pattern : "**/*.js"
+            outputdir : "${root.outputdir}"    
+            regexp: "// File :(.*):"        

@@ -1,0 +1,18 @@
+
+
+{% for id,assets in types.asset %}
+module.exports.{{id |replace(".","_")}}_assets = {
+{% for asset in assets %}
+  {{asset.name }} : require('./{{id}}.{{asset.name}}.js'),
+{% endfor %}
+}
+{% endfor %}
+
+{% for id,pts in types.participant %}
+module.exports.{{id |replace(".","_")}}_pts = {
+{% for asset in pts %}
+  {{asset.name }} : require('./{{id}}.{{asset.name}}.js'),
+{% endfor %}
+}
+{% endfor %}
+

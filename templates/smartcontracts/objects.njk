@@ -1,0 +1,41 @@
+{% for id,assets in types.asset %}
+{% for asset in assets %}
+// File :{{ id }}.{{asset.name }}:
+const Resource = require('composer-common').Resource;
+const Model = require('./_model');
+const ns = '{{ id }}';
+const type = '{{ asset.name }}';
+const qualifiedName = Model.getFullyQualifiedName(ns, type);
+
+class {{asset.name}} extends Resource  {
+    constructor(id){
+        let model = Model.getModel();
+        const classDecl = model.modelManager.getType(qualifiedName);
+        super(model.modelManager, classDecl, ns, type, id); 
+    }
+
+
+    toJSON(){
+        return this.getModelManager().getSerializer().toJSON(this,{validate:true,convertResourcesToRelationships:true,permitResourcesForRelationships:true});
+    }
+
+{% for name,info in asset.properties %}
+    /**
+    * {{info.description}}
+    */
+    set{{name | title}}( value ){
+        this.{{name}} = value;
+    }
+    
+    get{{name|title}}(){
+        return this.{{name}};
+    }
+{% endfor %}
+}
+module.exports={{asset.name}}
+
+{% endfor %}
+
+{% endfor %}
+
+
