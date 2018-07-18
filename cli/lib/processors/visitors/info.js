@@ -16,22 +16,22 @@
 
 
 
-const AssetDeclaration = require('composer-common').AssetDeclaration;
-const EnumDeclaration = require('composer-common').EnumDeclaration;
-const ConceptDeclaration = require('composer-common').ConceptDeclaration;
-const EnumValueDeclaration = require('composer-common').EnumValueDeclaration;
-const AclRule = require('composer-common').AclRule;
-const Field = require('composer-common').Field;
-const ModelFile = require('composer-common').ModelFile;
-const Script = require('composer-common').Script;
-const BusinessNetworkDefinition = require('composer-common').BusinessNetworkDefinition;
-const RelationshipDeclaration = require('composer-common').RelationshipDeclaration;
-const ParticipantDeclaration = require('composer-common').ParticipantDeclaration;
-const TransactionDeclaration = require('composer-common').TransactionDeclaration;
-const FunctionDeclaration = require('composer-common').FunctionDeclaration;
-const EventDeclaration = require('composer-common').EventDeclaration;
-const Query = require('composer-common').Query;
-const QueryFile = require('composer-common').QueryFile;
+const AssetDeclaration = require('../../../../composer/composer-common').AssetDeclaration;
+const EnumDeclaration = require('../../../../composer/composer-common').EnumDeclaration;
+const ConceptDeclaration = require('../../../../composer/composer-common').ConceptDeclaration;
+const EnumValueDeclaration = require('../../../../composer/composer-common').EnumValueDeclaration;
+const AclRule = require('../../../../composer/composer-common').AclRule;
+const Field = require('../../../../composer/composer-common').Field;
+const ModelFile = require('../../../../composer/composer-common').ModelFile;
+const Script = require('../../../../composer/composer-common').Script;
+const BusinessNetworkDefinition = require('../../../../composer/composer-common').BusinessNetworkDefinition;
+const RelationshipDeclaration = require('../../../../composer/composer-common').RelationshipDeclaration;
+const ParticipantDeclaration = require('../../../../composer/composer-common').ParticipantDeclaration;
+const TransactionDeclaration = require('../../../../composer/composer-common').TransactionDeclaration;
+const FunctionDeclaration = require('../../../../composer/composer-common').FunctionDeclaration;
+const EventDeclaration = require('../../../../composer/composer-common').EventDeclaration;
+const Query = require('../../../../composer/composer-common').Query;
+const QueryFile = require('../../../../composer/composer-common').QueryFile;
 const debug = require('debug')('concerto:infovisitor');
 
 /**

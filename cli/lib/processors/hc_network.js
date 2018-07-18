@@ -14,8 +14,9 @@
 'use strict';
 const winston = require('winston');
 const fs = require('fs');
+const util = require('util');
 
-const BusinessNetworkDefinition = require('composer-common').BusinessNetworkDefinition;
+const BusinessNetworkDefinition = require('../../../composer/composer-common').BusinessNetworkDefinition;
 
 // load the generators
 const basics = require('./generators/basics');
@@ -28,24 +29,34 @@ const version = require('../../package.json').version;
 let process = async function(context,options){
     let bnaFile = context._args.archive;
 
-
     // generators to use
     let generators = [basics, classdeclarations];
 
     if (options.systemns){
+        let modelTest = fs.readFileSync('./../../../../_scenario/model.cto','utf8');
+        
         context._bnd = new BusinessNetworkDefinition('composer@'+version, '', null, '**Hyperledger** Composer');
+        let _bnd = modelManager.addModelFile(modelTest);
+        
+
     }else {
         LOG.info(`Loading BNA from ${bnaFile}`);
 
+        
         // load the network definition from file
-        let buffer = fs.readFileSync(bnaFile);
-        context._bnd = await BusinessNetworkDefinition.fromArchive(buffer);
+        let buffer = fs.readFileSync(bnaFile, 'utf8');
+        context._bnd = new BusinessNetworkDefinition('composer@'+version, '', null, '**Hyperledger** Composer');
+        context._bnd.getModelManager().addModelFile(buffer);
+       
+
+        //figure out it's getting model file, console.log model 
     }
 
     // run standard Composer Introspector
     let visitor = new InfoVisitor();
     context.types = { asset: {}, transaction: {}, concept: {}, enum: {}, participant: {}, event: {} };
     context._bnd.accept(visitor, { data: context.types, ctx: context, system: options.systemns });
+    console.log(context.types);
 
     // run specific generators now to add extra information and structure
     context = generators.reduce((context, current) => {
