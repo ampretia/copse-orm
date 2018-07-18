@@ -10,9 +10,7 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the License for the specific language governing permissions and
 * limitations under the License.
-*/
-
-/**
+*
 * A Trader works for a Company, and has access to 1 or more accounts with cash in them.
 * Commerical Paper can be issued and transfered, finally it will be redeemed
 *

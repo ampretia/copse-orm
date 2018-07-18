@@ -5,7 +5,7 @@ tasks:
     processor : root
     options :
         outputdir : ${_args.outdir}
-        templateroot: "_model/code-templates"
+        templateroot: "templates"
         tempdir : ${default.temp}     
     subtasks :
     #  Use Hyperledger Composer taks to extract all information and setup the context

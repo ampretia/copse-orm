@@ -24,7 +24,7 @@ const classdeclarations = require('./generators/classdeclarations');
 const InfoVisitor = require('./visitors/info');
 const LOG = winston.loggers.get('opus');
 
-const version = require('../../package.json').version;
+const version = require('../../../package.json').version;
 
 let process = async function(context,options){
     let bnaFile = context._args.archive;
@@ -33,11 +33,9 @@ let process = async function(context,options){
     let generators = [basics, classdeclarations];
 
     if (options.systemns){
-        let modelTest = fs.readFileSync('./../../../../_scenario/model.cto','utf8');
-        
+              
         context._bnd = new BusinessNetworkDefinition('composer@'+version, '', null, '**Hyperledger** Composer');
         let _bnd = modelManager.addModelFile(modelTest);
-        
 
     }else {
         LOG.info(`Loading BNA from ${bnaFile}`);
