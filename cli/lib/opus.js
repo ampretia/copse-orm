@@ -214,6 +214,7 @@ async function go(args) {
         }
         mkdirp.sync(context.root.outputdir);
         mkdirp.sync(context.root.tempdir);
+        console.log(context);
         // start off with the root node and off we go.
         await processNode(context.tasks, context);
 
